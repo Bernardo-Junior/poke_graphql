@@ -1,0 +1,14 @@
+targets:
+  $default:
+    sources:
+      - lib/**
+      - graphql/**
+      - pokemon.schema.graphql
+    builders:
+      artemis:
+        options:
+          schema_mapping:
+            - schema: graphql/pokemon.schema.graphql
+              queries_glob: graphql/{queries,mutations}/{**/*.graphql,*.graphql}
+              output: lib/graphql/gen/api.graphql.dart
+              naming_scheme: pathedWithFields
