@@ -6,8 +6,13 @@ targets:
           include_if_null: false
       artemis:
         options:
+          scalar_mapping:
+            - custom_parser_import: 'package:keepfy/graphql/coercers.dart'
+              graphql_type: DateTime
+              dart_type: DateTime
+          #fragments_glob: lib/graphql/fragments/{**/*.graphql,*.graphql} # only if fragment files exist
           schema_mapping:
-            - schema: lib/graphql/pokemon.schema.graphql
+            - schema: lib/graphql/schema.graphql
               queries_glob: lib/graphql/{queries,mutations}/{**/*.graphql,*.graphql}
               output: lib/graphql/gen/api.graphql.dart
               naming_scheme: pathedWithFields
