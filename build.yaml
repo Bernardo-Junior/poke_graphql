@@ -1,14 +1,13 @@
 targets:
   $default:
-    sources:
-      - lib/**
-      - graphql/**
-      - pokemon.schema.graphql
     builders:
+      json_serializable:
+        options:
+          include_if_null: false
       artemis:
         options:
           schema_mapping:
-            - schema: graphql/pokemon.schema.graphql
-              queries_glob: graphql/{queries,mutations}/{**/*.graphql,*.graphql}
+            - schema: lib/graphql/pokemon.schema.graphql
+              queries_glob: lib/graphql/{queries,mutations}/{**/*.graphql,*.graphql}
               output: lib/graphql/gen/api.graphql.dart
               naming_scheme: pathedWithFields

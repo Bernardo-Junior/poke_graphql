@@ -241,7 +241,7 @@ packages:
       name: gql
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.1-alpha+1645425888336"
+    version: "0.13.0"
   gql_code_builder:
     dependency: transitive
     description:
@@ -255,28 +255,28 @@ packages:
       name: gql_dedupe_link
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2-alpha+1635885531760"
+    version: "2.0.0"
   gql_exec:
     dependency: transitive
     description:
       name: gql_exec
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.2-alpha+1635885531651"
+    version: "0.3.0"
   gql_http_link:
     dependency: transitive
     description:
       name: gql_http_link
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2-alpha+1635885531688"
+    version: "0.4.0"
   gql_link:
     dependency: transitive
     description:
       name: gql_link
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2-alpha+1635885531659"
+    version: "0.4.0"
   graphs:
     dependency: transitive
     description:

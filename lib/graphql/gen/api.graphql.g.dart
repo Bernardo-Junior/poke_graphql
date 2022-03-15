@@ -21,16 +21,25 @@ FetchPokemons$Query$Pokemons _$FetchPokemons$Query$PokemonsFromJson(
 }
 
 Map<String, dynamic> _$FetchPokemons$Query$PokemonsToJson(
-        FetchPokemons$Query$Pokemons instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'image': instance.image,
-      'classification': instance.classification,
-      'types': instance.types,
-      'maxCP': instance.maxCP,
-      'maxHP': instance.maxHP,
-    };
+    FetchPokemons$Query$Pokemons instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('image', instance.image);
+  writeNotNull('classification', instance.classification);
+  writeNotNull('types', instance.types);
+  writeNotNull('maxCP', instance.maxCP);
+  writeNotNull('maxHP', instance.maxHP);
+  return val;
+}
 
 FetchPokemons$Query _$FetchPokemons$QueryFromJson(Map<String, dynamic> json) {
   return FetchPokemons$Query()
@@ -41,11 +50,18 @@ FetchPokemons$Query _$FetchPokemons$QueryFromJson(Map<String, dynamic> json) {
         .toList();
 }
 
-Map<String, dynamic> _$FetchPokemons$QueryToJson(
-        FetchPokemons$Query instance) =>
-    <String, dynamic>{
-      'pokemons': instance.pokemons?.map((e) => e?.toJson()).toList(),
-    };
+Map<String, dynamic> _$FetchPokemons$QueryToJson(FetchPokemons$Query instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('pokemons', instance.pokemons?.map((e) => e?.toJson()).toList());
+  return val;
+}
 
 FetchPokemonsArguments _$FetchPokemonsArgumentsFromJson(
     Map<String, dynamic> json) {
