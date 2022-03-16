@@ -69,10 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     init();
-    pokeGraphqlController.registerServices();
   }
 
   void init() async {
+    await pokeGraphqlController.registerServices();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     String appName = packageInfo.appName;
