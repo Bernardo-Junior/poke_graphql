@@ -30,7 +30,7 @@ targets:
       artemis:
         options:
           scalar_mapping:
-            - custom_parser_import: 'package:keepfy/graphql/coercers.dart'
+            - custom_parser_import: 'lib/graphql/coercers.dart'
               graphql_type: DateTime
               dart_type: DateTime
           #fragments_glob: lib/graphql/fragments/{**/*.graphql,*.graphql} # only if fragment files exist

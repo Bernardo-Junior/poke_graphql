@@ -1,4 +1,6 @@
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:poke_graphql/poke_graphql_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,6 +51,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final PokeGraphqlController pokeGraphqlController = PokeGraphqlController();
 
   void _incrementCounter() {
     setState(() {
@@ -59,6 +62,28 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    init();
+    pokeGraphqlController.registerServices();
+  }
+
+  void init() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    print(appName);
+    print(packageName);
+    print(version);
+    print(buildNumber);
   }
 
   @override
