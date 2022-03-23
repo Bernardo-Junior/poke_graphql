@@ -19,7 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 - Generate Types
 . To generate types graphql to dart, first you create a lib/graphql/schema.graphql and add all types this
 . After this create your queries/mutations and fragments in folders
-    ex: lib/queries/fetch_pokemon.graphql
+    ex: lib/graphql/queries/fetch_pokemon.graphql
 . After this create a build.yalm and add this:
 targets:
   $default:

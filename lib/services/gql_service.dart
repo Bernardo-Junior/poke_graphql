@@ -34,12 +34,14 @@ class GQLService {
       print('Executing query: ${query!.operationName}');
     }
 
-    final response = await _client.query(QueryOptions(
-      variables: query!.getVariablesMap(),
-      document: query.document,
-      fetchPolicy: FetchPolicy.networkOnly,
-      errorPolicy: errorPolicy,
-    ));
+    final response = await _client.query(
+      QueryOptions(
+        variables: query!.getVariablesMap(),
+        document: query.document,
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
+        errorPolicy: errorPolicy,
+      ),
+    );
 
     return ResponseData<T>(
       data: response.data != null ? query.parse(response.data!) : null,

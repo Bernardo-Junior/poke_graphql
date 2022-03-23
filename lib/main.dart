@@ -1,6 +1,10 @@
+import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:poke_graphql/graphql/gen/api.graphql.dart';
 import 'package:poke_graphql/poke_graphql_controller.dart';
+
+import 'services/gql_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,6 +88,15 @@ class _MyHomePageState extends State<MyHomePage> {
     print(packageName);
     print(version);
     print(buildNumber);
+
+    final client = Get.find<GQLService>();
+
+    final pokemonsQuery =
+        FetchPokemonsQuery(variables: FetchPokemonsArguments(quantity: 15));
+
+    final query = await client.query(pokemonsQuery);
+
+    print(query.data?.pokemons?.length);
   }
 
   @override

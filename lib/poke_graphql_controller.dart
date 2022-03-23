@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+// ignore: todo
+// TODO: if your app use User Agent, use this.
+// import 'package:package_info_plus/package_info_plus.dart';
 import 'package:poke_graphql/screens/home/home_screen.dart';
 import 'package:poke_graphql/services/auth_service.dart';
 import 'package:get/get.dart';
@@ -30,25 +32,30 @@ class PokeGraphqlController {
   }
 
   Future registerServices() async {
-    print('HERE');
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    // ignore: todo
+    // TODO: if your app use User Agent, use this.
+    // PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final dio = Get.put(Dio())
       ..interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) async {
-            final auth = AuthService();
-            if (await auth.hasToken()) {
-              final token = auth.hasToken();
+            // ignore: todo
+            // TODO: if your app use User Agent, use this and Token.
+            // final auth = AuthService();
+            // if (await auth.hasToken()) {
+            //   final token = auth.hasToken();
 
-              options.headers['user-agent'] =
-                  'AppNameMobile/${packageInfo.version}:${packageInfo.buildNumber}';
+            //   options.headers['user-agent'] =
+            //       'AppNameMobile/${packageInfo.version}:${packageInfo.buildNumber}';
 
-              options.headers['Authorization'] = token;
+            //   // options.headers['Authorization'] = token;
 
-              return handler.next(options);
-            } else {
-              print('Token Error');
-            }
+            //   return handler.next(options);
+            // } else {
+            //   print('Token Error');
+            // }
+
+            return handler.next(options);
           },
         ),
       );
@@ -60,7 +67,7 @@ class PokeGraphqlController {
     final client = Get.put<GraphQLClient>(
       buildClient(
         dio: dio,
-        uri: '',
+        uri: 'https://graphql-pokemon2.vercel.app/',
         onGraphQLError: (request, forward, response) {
           final service = ErrorService();
           final error = service.parseList(response.errors!).first;
