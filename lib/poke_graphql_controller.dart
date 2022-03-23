@@ -40,7 +40,7 @@ class PokeGraphqlController {
         InterceptorsWrapper(
           onRequest: (options, handler) async {
             // ignore: todo
-            // TODO: if your app use User Agent, use this and Token.
+            // TODO: if your app use User Agent and Token use this.
             // final auth = AuthService();
             // if (await auth.hasToken()) {
             //   final token = auth.hasToken();
