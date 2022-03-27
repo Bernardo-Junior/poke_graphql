@@ -3,11 +3,11 @@ targets:
     builders:
       json_serializable:
         options:
-          include_if_null: false
+          include_if_null: true
       artemis:
         options:
           scalar_mapping:
-            - custom_parser_import: 'lib/graphql/coercers.dart'
+            - custom_parser_import: 'package:poke_graphql/graphql/coercers.dart'
               graphql_type: DateTime
               dart_type: DateTime
           #fragments_glob: lib/graphql/fragments/{**/*.graphql,*.graphql} # only if fragment files exist

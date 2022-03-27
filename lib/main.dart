@@ -91,12 +91,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final client = Get.find<GQLService>();
 
-    final pokemonsQuery =
-        FetchPokemonsQuery(variables: FetchPokemonsArguments(quantity: 15));
+    final pokemonsQuery = FetchPokemonsQuery(
+        variables: FetchPokemonsArguments(quantity: -3123123123213));
 
     final query = await client.query(pokemonsQuery);
-
-    print(query.data?.pokemons?.length);
+    if (query.exception == null) {
+      print(query.data?.pokemons?.length);
+    } else {
+      print(query.exception?.linkException?.originalException);
+    }
   }
 
   @override
