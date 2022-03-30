@@ -20,7 +20,13 @@ GraphQLClient buildClient({
   required String uri,
   required ErrorHandler onGraphQLError,
 }) {
-  final errorLink = ErrorLink(onGraphQLError: onGraphQLError);
+  final errorLink = ErrorLink(
+    onGraphQLError: onGraphQLError,
+    onException: (request, forward, exception) async* {
+      throw exception;
+    },
+  );
+
   final dioLink = DioLink(
     uri,
     client: dio,
