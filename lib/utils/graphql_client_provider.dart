@@ -26,7 +26,6 @@ GraphQLClient buildClient({
       throw exception;
     },
   );
-
   final dioLink = DioLink(
     uri,
     client: dio,
