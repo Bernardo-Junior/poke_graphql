@@ -39,13 +39,13 @@ class ServerRejection {
 
     return ServerRejection(
       isTrusted: extensions['isTrusted'] as bool? ?? false,
-      code: _supportedCodes[rawCode]!,
+      code: _supportedCodes[rawCode],
       message: extensions['message'] as String,
     );
   }
 
   final bool isTrusted;
-  final SupportedErrorCodes code;
+  final SupportedErrorCodes? code;
   final String? message;
 }
 
@@ -96,7 +96,7 @@ class ErrorService {
 
   String? extractMessage(ServerRejection? error) {
     final codeDescription =
-        error?.code != null ? describeEnum(error!.code) : 'UNKNOWN';
+        error?.code != null ? describeEnum(error!.code!) : 'UNKNOWN';
 
     if (error == null) {
       return 'Erro desconhecido (UNKNOWN)';
