@@ -4,7 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'saas_response_parser.dart';
 
-String? _uuidFromObject(Object object) {
+String? uuidFromObject(Object object) {
   if (object is Map<String, Object>) {
     final typeName = object['__typename'] as String?;
     final id = object['id'] as String?;
@@ -31,7 +31,7 @@ GraphQLClient buildClient({
     client: dio,
     parser: SaasResponseParser(),
   );
-  final cache = GraphQLCache(dataIdFromObject: _uuidFromObject);
+  final cache = GraphQLCache(dataIdFromObject: uuidFromObject);
 
   return GraphQLClient(
     cache: cache,

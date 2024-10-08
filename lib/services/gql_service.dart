@@ -1,7 +1,6 @@
-import 'package:artemis/artemis.dart';
+import 'package:graphql/client.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:json_annotation/json_annotation.dart' as json;
-import 'package:poke_graphql/utils/is_debug.dart';
 
 class ResponseData<T> {
   ResponseData({this.data, this.exception});
@@ -14,7 +13,7 @@ class ResponseData<T> {
   ResponseData<R> mapData<R>(R Function(T data) mapper) {
     return ResponseData(
       exception: exception,
-      data: data != null ? mapper(data!) : null,
+      data: data != null ? mapper(data as T) : null,
     );
   }
 }
@@ -25,49 +24,43 @@ class GQLService {
   final GraphQLClient _client;
 
   Future<ResponseData<T>> query<T, U extends json.JsonSerializable>(
-    GraphQLQuery<T, U>? query, {
+    QueryOptions<T>? query, {
     FetchPolicy? fetchPolicy,
     ErrorPolicy? errorPolicy,
   }) async {
     assert(query != null, 'A query object must be provided');
-    if (isDebug()) {
-      print('Executing query: ${query!.operationName}');
-    }
 
     final response = await _client.query(
       QueryOptions(
-        variables: query!.getVariablesMap(),
+        variables: query!.variables,
         document: query.document,
-        fetchPolicy: FetchPolicy.cacheAndNetwork,
+        fetchPolicy: FetchPolicy.networkOnly,
         errorPolicy: errorPolicy,
       ),
     );
 
     return ResponseData<T>(
-      data: response.data != null ? query.parse(response.data!) : null,
+      data: response.data != null ? query.parserFn(response.data!) : null,
       exception: response.exception,
     );
   }
 
   Future<ResponseData<T>> mutation<T, U extends json.JsonSerializable>(
-    GraphQLQuery<T, U>? mutation, {
+    QueryOptions<T>? mutation, {
     FetchPolicy? fetchPolicy,
     ErrorPolicy? errorPolicy,
   }) async {
     assert(mutation != null, 'A mutation object must be provided');
-    if (isDebug()) {
-      print('Executing mutation: ${mutation!.operationName}');
-    }
 
     final response = await _client.mutate(MutationOptions(
-      variables: mutation!.getVariablesMap(),
+      variables: mutation!.variables,
       document: mutation.document,
       fetchPolicy: fetchPolicy,
       errorPolicy: errorPolicy,
     ));
 
     return ResponseData<T>(
-      data: response.data != null ? mutation.parse(response.data!) : null,
+      data: response.data != null ? mutation.parserFn(response.data!) : null,
       exception: response.exception,
     );
   }

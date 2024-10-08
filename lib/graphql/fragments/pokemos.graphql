@@ -1,0 +1,10 @@
+fragment PokemonItem on Pokemon {
+  __typename
+    id
+    name
+    image
+    classification
+    types
+    maxCP
+    maxHP
+}

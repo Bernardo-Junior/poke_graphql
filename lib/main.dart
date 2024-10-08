@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:poke_graphql/graphql/gen/api.graphql.dart';
+import 'package:poke_graphql/graphql/queries/fetch_pokemons.graphql.dart';
 import 'package:poke_graphql/poke_graphql_controller.dart';
 
 import 'services/gql_service.dart';
@@ -91,8 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final client = Get.find<GQLService>();
 
-    final pokemonsQuery = FetchPokemonsQuery(
-        variables: FetchPokemonsArguments(quantity: -3123123123213));
+    final pokemonsQuery = OptionsQueryFetchPokemons(
+      variables: VariablesQueryFetchPokemons(
+        quantity: 20,
+      ),
+    );
 
     final query = await client.query(pokemonsQuery);
     if (query.exception == null) {
@@ -141,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
           ],
         ),

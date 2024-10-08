@@ -22,7 +22,6 @@ linter:
   
   # producing the lint.
   rules:
-    ignore_for_file: lib/gen/api.graphql.g.dart
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

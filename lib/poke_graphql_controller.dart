@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 // ignore: todo
 // TODO: if your app use User Agent, use this.
 // import 'package:package_info_plus/package_info_plus.dart';
@@ -31,29 +33,35 @@ class PokeGraphqlController {
     )));
   }
 
+  Future<String?> initPlatformState() async {
+    String? platformVersion;
+
+    try {
+      platformVersion = FkUserAgent.userAgent!;
+    } catch (e) {}
+
+    return platformVersion;
+  }
+
   Future registerServices() async {
-    // ignore: todo
-    // TODO: if your app use User Agent, use this.
-    // PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var packageInfo = await PackageInfo.fromPlatform();
+
     final dio = Get.put(Dio())
       ..interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) async {
-            // ignore: todo
-            // TODO: if your app use User Agent and Token use this.
-            // final auth = AuthService();
-            // if (await auth.hasToken()) {
-            //   final token = auth.hasToken();
+            await FkUserAgent.init();
+            var ua = await initPlatformState();
 
-            //   options.headers['user-agent'] =
-            //       'AppNameMobile/${packageInfo.version}:${packageInfo.buildNumber}';
+            if (ua != null) {
+              options.headers['user-agent'] =
+                  '$ua QuironsMobile/${packageInfo.version}:${packageInfo.buildNumber}';
+            } else {
+              options.headers['user-agent'] =
+                  'QuironsMobile/${packageInfo.version}:${packageInfo.buildNumber}';
+            }
 
-            //   // options.headers['Authorization'] = token;
-
-            //   return handler.next(options);
-            // } else {
-            //   print('Token Error');
-            // }
+            // options.headers['Authorization'] = null;
 
             return handler.next(options);
           },

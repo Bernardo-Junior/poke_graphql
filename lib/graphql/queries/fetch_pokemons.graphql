@@ -1,11 +1,7 @@
-query fetch_pokemons($quantity: Int!){
+#import '../fragments/pokemos.graphql';
+
+query FetchPokemons($quantity: Int!){
   pokemons(first:$quantity){
-    id
-    name
-  image
-    classification
-    types
-    maxCP
-    maxHP
+    ...PokemonItem
   }
 }
