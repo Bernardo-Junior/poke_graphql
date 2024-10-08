@@ -43,8 +43,10 @@ targets:
 . Lastly run flutter packages pub run build_runner build --delete-conflicting-outputs to generate dart types
 
 - current dependency: 
-    artemis: ^7.0.0-beta.9 
-    build_runner: ^2.0.2 
-    json_serializable: ^4.1.1
+    graphql_codegen: ^1.0.1
+    build_runner: ^2.3.3 
+    json_serializable: ^6.5.4
+
+- Flutter version: 3.24.0
 
 
